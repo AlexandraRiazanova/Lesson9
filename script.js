@@ -10,7 +10,7 @@ const fines = {
     quilt3: 150,
 };
 
-function User(name, language, grade = grades.Junior) {
+function User(name, language, grade) {
     this.name = name;
     this.grade = grade;
     this.salary = 1000;
@@ -21,19 +21,27 @@ function User(name, language, grade = grades.Junior) {
         this.tasks++;
     };
     this.upgrade = () => {
-        if(this.tasks >= 5){
-            this.grade = grades.Middle;
+        if(this.tasks < 4){
+            console.log('Недостаточно задач для повышения уровня')
         }
-        if(this.tasks > 8){
+        if(this.tasks > 4 && this.tasks < 8){
+            this.grade = grades.Middle;
+            this.salary *= 2;
+        }
+        if(this.tasks >= 8){
             this.grade = grades.Senior;
+            this.salary *= 3;
+            console.log('Достигнут максимальный уровень')
         }
     }
-    this.fine = () => {
-
+    this.fine = (user, quilt) => {
+        user.salary = user.salary - quilt
     }
 }
 
-const user = new User('John', 'C++');
+const user = new User('John', 'C++', grades.Junior);
+const user2 = new User('Sam', 'C++', grades.Junior);
+
 
 console.log(user)
 user.addTask();
@@ -46,5 +54,8 @@ user.addTask();
 user.addTask();
 user.addTask();
 user.upgrade();
-user.fine()
+console.log(user)
+user.fine(user2, fines.quilt1)
+console.log(user2)
+user.fine(user, fines.quilt3)
 console.log(user)
