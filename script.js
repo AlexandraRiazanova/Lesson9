@@ -34,8 +34,8 @@ function User(name, language, grade) {
             console.log('Достигнут максимальный уровень')
         }
     }
-    this.fine = (user, quilt) => {
-        user.salary = user.salary - quilt
+    this.fine = (quilt) => {
+        this.salary = this.salary - quilt
     }
 }
 
@@ -44,6 +44,7 @@ const user2 = new User('Sam', 'C++', grades.Junior);
 
 
 console.log(user)
+
 user.addTask();
 user.addTask();
 user.addTask();
@@ -53,9 +54,12 @@ user.addTask();
 user.addTask();
 user.addTask();
 user.addTask();
+
 user.upgrade();
 console.log(user)
-user.fine(user2, fines.quilt1)
+
+user2.fine(fines.quilt1)
 console.log(user2)
-user.fine(user, fines.quilt3)
+
+user.fine(fines.quilt3)
 console.log(user)
